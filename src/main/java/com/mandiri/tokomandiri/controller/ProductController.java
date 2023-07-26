@@ -3,13 +3,14 @@ package com.mandiri.tokomandiri.controller;
 import com.mandiri.tokomandiri.entity.Product;
 import com.mandiri.tokomandiri.repository.ProductRepository;
 import com.mandiri.tokomandiri.service.ProductService;
+import com.mandiri.tokomandiri.utils.constant.ApiUrlConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-
+@RequestMapping(ApiUrlConstant.PRODUCT_PATH)
 public class ProductController {
     ProductService productService;
 
@@ -18,12 +19,12 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("/products")
+    @PostMapping
     public Product saveProduct(@RequestBody Product product){
         return productService.saveProduct(product);
     }
 
-    @GetMapping("/products")
+    @GetMapping
     public List<Product> getAllProducts(){
         return productService.getAllProducts();
     }
@@ -38,7 +39,7 @@ public class ProductController {
         // ... (tambahkan logika untuk validasi, pembaruan, dan penanganan pengecualian jika perlu)
         return productService.updateProduct(updatedProduct);
     }
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable String id){
          productService.deleteProduct(id);
     }
